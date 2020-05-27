@@ -6,8 +6,9 @@
 package view;
 
 import controller.ClienteController;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import dao.UsuarioDAO;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
+import static javax.swing.JOptionPane.showMessageDialog;
 import model.Usuario;
 
 /**
@@ -271,13 +272,20 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btCadastrarActionPerformed
 
     private void inicializar(){        
-        Chat chat = new Chat();
-        chat.setVisible(true);
-        Usuario usuario = new Usuario();
-        usuario.setNome(tfNome.getText());
-        chat.setNome(usuario.getNome());
-        ClienteController controller = new ClienteController();
-        controller.iniciarConexao(chat);
+        Usuario usuario = UsuarioDAO.getInstance().findUser(tfNome.getText(), String.copyValueOf(pfSenha.getPassword()), Integer.valueOf(tfEquipe.getText()));
+        if(verificaUsuario(usuario)){
+            Chat chat = new Chat();
+            chat.setVisible(true);
+            chat.setNome(usuario.getNome());
+            ClienteController controller = new ClienteController();
+            controller.iniciarConexao(chat);
+        } else {
+            showMessageDialog(null, "Usuário não cadastrado", "", ERROR_MESSAGE);
+        }
+    }
+    
+    private boolean verificaUsuario(Usuario usuario){
+        return usuario != null;
     }
     
 

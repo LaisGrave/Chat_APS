@@ -14,6 +14,14 @@ public class Usuario {
     private String nome;
     
     private int equipe;
+    
+    private String senha;
+    
+    public Usuario( String nome, int equipe, String senha){
+        setNome(nome);
+        setEquipe(equipe);
+        setSenha(senha);
+    }
 
     /**
      * @return the nome
@@ -41,5 +49,19 @@ public class Usuario {
      */
     public void setEquipe(int equipe) {
         this.equipe = equipe;
+    }
+
+    /**
+     * @return the senha
+     */
+    public String getSenha() {
+        return senha;
+    }
+
+    /**
+     * @param senha the senha to set
+     */
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 }

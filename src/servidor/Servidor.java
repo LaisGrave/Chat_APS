@@ -1,12 +1,13 @@
 package servidor;
 
-import cliente.Cliente;
-import controller.ServidorController;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.io.IOException;
-import java.io.PrintStream;
 import java.util.ArrayList;
+
+import cliente.Cliente;
+import controller.ServidorController;
 /**
  *
  * @author Lais
@@ -21,7 +22,7 @@ public class Servidor{
            
         public void rodarServer(){
             //String mensagemRecebida;
-            ArrayList <PrintStream> clientes = new ArrayList<>();
+            ArrayList <ObjectOutputStream> clientes = new ArrayList<>();
             try{
             ServerSocket soc = new ServerSocket (this.porta);
             Socket socket;
@@ -29,11 +30,10 @@ public class Servidor{
             
                 while(true){
                     socket = soc.accept();      
-                       clientes.add(new PrintStream(socket.getOutputStream()));
+                       clientes.add(new ObjectOutputStream(socket.getOutputStream()));
                        Cliente cliente = new Cliente(clientes);
                        ServidorController controller = new ServidorController();
-                       controller.threadServidor(socket, cliente);
-                       
+                       controller.threadServidor(socket, cliente);                      
                 }
             } catch (IOException ex){
                 ex.printStackTrace();

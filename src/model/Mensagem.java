@@ -5,59 +5,58 @@
  */
 package model;
 
-import java.util.Date;
+import java.io.Serializable;
 
 /**
  *
  * @author Jéssica
  */
-public class Mensagem {
-    
-    private String mensagem;
-    
-    private Usuario usuario;
-    
-    private Date data;
+public class Mensagem implements Serializable{
 
-    /**
-     * @return the mensagem
-     */
-    public String getMensagem() {
-        return mensagem;
-    }
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * @param mensagem the mensagem to set
-     */
-    public void setMensagem(String mensagem) {
-        this.mensagem = mensagem;
-    }
+	private String mensagem;
 
-    /**
-     * @return the usuario
-     */
-    public Usuario getUsuario() {
-        return usuario;
-    }
+	private String usuario;
 
-    /**
-     * @param usuario the usuario to set
-     */
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
+	public Mensagem(String mensagem, String usuario) {
+		setMensagem(mensagem);
+		setUsuario(usuario);
+	}
 
-    /**
-     * @return the data
-     */
-    public Date getData() {
-        return data;
-    }
+	/**
+	 * @return the mensagem
+	 */
+	public String getMensagem() {
+		return mensagem;
+	}
 
-    /**
-     * @param data the data to set
-     */
-    public void setData(Date data) {
-        this.data = data;
-    }
+	/**
+	 * @param mensagem the mensagem to set
+	 */
+	public void setMensagem(String mensagem) {
+		this.mensagem = mensagem;
+	}
+
+	/**
+	 * @return the usuario
+	 */
+	public String getUsuario() {
+		return usuario;
+	}
+
+	/**
+	 * @param usuario the usuario to set
+	 */
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	@Override
+	public String toString() {
+		return usuario + " diz: " + mensagem;
+	}
 }

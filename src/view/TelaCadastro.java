@@ -5,6 +5,11 @@
  */
 package view;
 
+import dao.UsuarioDAO;
+import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
+import static javax.swing.JOptionPane.showMessageDialog;
+import model.Usuario;
+
 /**
  *
  * @author VITOR
@@ -132,6 +137,11 @@ public class TelaCadastro extends javax.swing.JFrame {
         btCadastro.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         btCadastro.setForeground(new java.awt.Color(255, 255, 255));
         btCadastro.setText("Cadastrar");
+        btCadastro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCadastroActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -194,6 +204,23 @@ public class TelaCadastro extends javax.swing.JFrame {
         in.setVisible(true);
     }//GEN-LAST:event_btVoltarActionPerformed
 
+    private void btCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastroActionPerformed
+        Usuario usuario = new Usuario(tfNomeCadastro.getText(), Integer.valueOf(tfEquipeCadastro.getText()), String.copyValueOf(pfSenhaCadastro.getPassword()));
+        int criado = UsuarioDAO.getInstance().create(usuario);
+        if(criado >0){
+            showMessageDialog(null, "Usuário cadastrado", "", INFORMATION_MESSAGE);
+        } else{
+            showMessageDialog(null, "Usuário já é cadastrado", "", INFORMATION_MESSAGE);
+        }
+        limparCampos();
+    }//GEN-LAST:event_btCadastroActionPerformed
+
+    private void limparCampos(){
+        tfNomeCadastro.setText("");
+        tfEquipeCadastro.setText("");
+        pfSenhaCadastro.setText("");
+    }
+    
     /**
      * @param args the command line arguments
      */
